@@ -7586,7 +7586,8 @@ log$1("test2");
             await this.char.raw_ctrl.writeValue(AB([0x01, 0x03, 0x19]));
 log$1("test3");
             //???
-            await this.char.hrm_ctrl.writeValue(AB([0x01, 0x00]));
+            await this.char.auth.writeValue(AB([0x01, 0x00]))
+            // await this.char.hrm_ctrl.writeValue(AB([0x01, 0x00]));
 log$1("test4");
             await this.char.hrm_ctrl.writeValue(AB([0x15, 0x01, 0x01]));
 log$1("test5");
@@ -7744,7 +7745,7 @@ log$1("test5");
 
     async function scan() {
         if (!bluetooth) {
-            log$1('WebBluetooth14 is not supported by your browser!');
+            log$1('WebBluetooth15 is not supported by your browser!');
             return;
         }
 
