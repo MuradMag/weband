@@ -7582,8 +7582,8 @@
                 console.log("consolelog_started1");
                 log('log_started');
                 log("log_started2");
-                //await this.hrmStart();
-                //await this.char.raw_ctrl.writeValue(AB([0x02]));
+                await this.hrmStart();
+                await this.char.raw_ctrl.writeValue(AB([0x02]));
                 console.log(cons_finished);
                 log('raw_finished');
               }
@@ -7654,7 +7654,7 @@
             }
 
             async function test_all(miband, log) {
-              log('commit 8');
+              log('commit 10');
 
               // let info = {
               //   time:     await miband.getTime(),
@@ -7691,6 +7691,7 @@
               // log('Result:', await miband.hrmRead());
 
               log('Heart Rate Monitor (continuous for 300 sec)...');
+              log('lalala');
               miband.on('heart_rate', (rate) => {
                 log('Heart Rate:', rate);
               });
@@ -7723,7 +7724,7 @@
 
             async function scan() {
               if (!bluetooth) {
-                log$1('WebBluetooth9 is not supported by your browser!');
+                log$1('WebBluetooth10 is not supported by your browser!');
                 return;
               }
 
