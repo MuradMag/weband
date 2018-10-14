@@ -7616,7 +7616,9 @@
 
                 } else if (event.target.uuid === this.char.hrm_data.uuid) {
                   let rate = value.readUInt16BE(0);
-                  this.emit('heart_rate345', rate);
+                  this.emit('heart_rate', rate);
+                  console.log("we are here 7620");
+                  log('Heart Rate:', rate);
 
                 } else if (event.target.uuid === this.char.event.uuid) {
                   const cmd = value.toString('hex');
@@ -7688,7 +7690,7 @@
 
               log('RAW data (no decoding)...')
               miband.rawStart();
-              await delay(300000);
+              await delay(30000);
               miband.rawStop();
 
               log('Finished.');
