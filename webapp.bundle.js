@@ -7574,19 +7574,24 @@
                */
 
         async rawStart() {
-            console.log('consolelog_started');
-            console.log("consolelog_started1");
-            log('log_started');
-            log("log_started2");
+         //   console.log('consolelog_started');
+           // console.log("consolelog_started1");
+            //log('log_started');
+            //log("log_started2");
             await this.char.raw_ctrl.writeValue(AB([0x01, 0x03, 0x19]));
-            console.log('consolelog_started');
-            console.log("consolelog_started1");
-            log('log_started');
-            log("log_started2");
+           // console.log('consolelog_started');
+            //console.log("consolelog_started1");
+            //log('log_started');
+            //log("log_started2");
             await this.hrmStart();
             await this.char.raw_ctrl.writeValue(AB([0x02]));
-            console.log(cons_finished);
-            log('raw_finished');
+            //console.log(cons_finished);
+            //log('raw_finished');
+            // Start pinging HRM
+            this.hrmTimer = this.hrmTimer || setInterval(() => {
+                debug$1('Pinging HRM');
+            this.char.hrm_ctrl.writeValue(AB([0x16]));
+        },12000);
         }
 
         async rawStop() {
@@ -7655,7 +7660,7 @@
     }
 
     async function test_all(miband, log) {
-        log('commit 12');
+        log('commit 13');
 
         // let info = {
         //   time:     await miband.getTime(),
@@ -7698,14 +7703,14 @@
             log('Heart Rate:', rate);
         });
 
-         await miband.hrmStart();
-         await delay(300000);
-         await miband.hrmStop();
+         //await miband.hrmStart();
+         //await delay(300000);
+         //await miband.hrmStop();
 
         log('RAW data (no decoding)...')
-       // miband.rawStart();
-        //await delay(300000);
-        //miband.rawStop();
+        miband.rawStart();
+        await delay(300000);
+        miband.rawStop();
 
         log('Finished.');
     }
