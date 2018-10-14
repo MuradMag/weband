@@ -7578,13 +7578,24 @@
            // console.log("consolelog_started1");
             //log('log_started');
             //log("log_started2");
+
+            await this.char.hrm_ctrl.writeValue(AB([0x15, 0x02, 0x00]));
+            await this.char.hrm_ctrl.writeValue(AB([0x15, 0x01, 0x00]));
+
             await this.char.raw_ctrl.writeValue(AB([0x01, 0x03, 0x19]));
+
+            //???
+            await this.char.hrm_ctrl.writeValue(AB([0x01, 0x00]));
+
+            await this.char.hrm_ctrl.writeValue(AB([0x15, 0x01, 0x01]));
+
+            await this.char.raw_ctrl.writeValue(AB([0x02]));
            // console.log('consolelog_started');
             //console.log("consolelog_started1");
             //log('log_started');
             //log("log_started2");
-            await this.hrmStart();
-            await this.char.raw_ctrl.writeValue(AB([0x02]));
+            // await this.hrmStart();
+            // await this.char.raw_ctrl.writeValue(AB([0x02]));
             //console.log(cons_finished);
             //log('raw_finished');
             // Start pinging HRM
@@ -7660,7 +7671,7 @@
     }
 
     async function test_all(miband, log) {
-        log('commit 13');
+        log('commit 14');
 
         // let info = {
         //   time:     await miband.getTime(),
@@ -7731,7 +7742,7 @@
 
     async function scan() {
         if (!bluetooth) {
-            log$1('WebBluetooth12 is not supported by your browser!');
+            log$1('WebBluetooth14 is not supported by your browser!');
             return;
         }
 
