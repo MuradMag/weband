@@ -7619,7 +7619,7 @@ log$1("test5");
 
         _handleNotify(event) {
             const value = Buffer.from(event.target.value.buffer);
-log$1(value);
+// log$1(value);
             if (event.target.uuid === this.char.auth.uuid) {
                 const cmd = value.slice(0,3).toString('hex');
                 if (cmd === '100101') {         // Set New Key OK
@@ -7645,7 +7645,8 @@ log$1(value);
                 }
 
             } else if (event.target.uuid === this.char.hrm_data.uuid) {
-                let rate = value.readUInt16BE(0);
+                let rate = value.readUInt16BE(0).toString(16);
+                // let rate = value;
                 this.emit('heart_rate', rate);
                 //console.log("we are here 7620");
                 //log('Heart Rate:', rate);
@@ -7674,7 +7675,7 @@ log$1(value);
     }
 
     async function test_all(miband, log) {
-        log('commit 16');
+        log('commit 17');
 
         // let info = {
         //   time:     await miband.getTime(),
