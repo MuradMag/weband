@@ -7654,8 +7654,8 @@ log$1("test5");
               // log$1("VALUE56 : "+value.readUIntBE(0,6).toString(16));
               // log$1("VALUE : "+value.readUInt16BE(0).toString(16));
                 // let rate = value.readUInt16BE(0).toString(16);
-                let rate = value;
-                this.emit('heart_rate', rate);
+                // let rate = value;
+                this.emit('heart_rate', value);
                 //console.log("we are here 7620");
                 //log('Heart Rate:', rate);
 
@@ -7683,7 +7683,7 @@ log$1("test5");
     }
 
     async function test_all(miband, log) {
-        log('commit 20');
+        log('commit 21');
 
         // let info = {
         //   time:     await miband.getTime(),
