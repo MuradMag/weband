@@ -7580,16 +7580,18 @@
             //log("log_started2");
 
             await this.char.hrm_ctrl.writeValue(AB([0x15, 0x02, 0x00]));
+            log$1("test1");
             await this.char.hrm_ctrl.writeValue(AB([0x15, 0x01, 0x00]));
-
+log$1("test2");
             await this.char.raw_ctrl.writeValue(AB([0x01, 0x03, 0x19]));
-
+log$1("test3");
             //???
             await this.char.hrm_ctrl.writeValue(AB([0x01, 0x00]));
-
+log$1("test4");
             await this.char.hrm_ctrl.writeValue(AB([0x15, 0x01, 0x01]));
-
+log$1("test5");
             await this.char.raw_ctrl.writeValue(AB([0x02]));
+           log$1("test6");
            // console.log('consolelog_started');
             //console.log("consolelog_started1");
             //log('log_started');
@@ -7644,8 +7646,8 @@
             } else if (event.target.uuid === this.char.hrm_data.uuid) {
                 let rate = value.readUInt16BE(0);
                 this.emit('heart_rate', rate);
-                console.log("we are here 7620");
-                log('Heart Rate:', rate);
+                //console.log("we are here 7620");
+                //log('Heart Rate:', rate);
 
             } else if (event.target.uuid === this.char.event.uuid) {
                 const cmd = value.toString('hex');
@@ -7671,7 +7673,7 @@
     }
 
     async function test_all(miband, log) {
-        log('commit 14');
+        log('commit 15');
 
         // let info = {
         //   time:     await miband.getTime(),
