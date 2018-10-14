@@ -7616,7 +7616,7 @@
 
                 } else if (event.target.uuid === this.char.hrm_data.uuid) {
                   let rate = value.readUInt16BE(0);
-                  this.emit('heart_rate', rate);
+                  this.emit('heart_rate345', rate);
 
                 } else if (event.target.uuid === this.char.event.uuid) {
                   const cmd = value.toString('hex');
@@ -7643,52 +7643,53 @@
 
             async function test_all(miband, log) {
 
-              let info = {
-                time:     await miband.getTime(),
-                battery:  await miband.getBatteryInfo(),
-                hw_ver:   await miband.getHwRevision(),
-                sw_ver:   await miband.getSwRevision(),
-                serial:   await miband.getSerial(),
-              };
+              // let info = {
+              //   time:     await miband.getTime(),
+              //   battery:  await miband.getBatteryInfo(),
+              //   hw_ver:   await miband.getHwRevision(),
+              //   sw_ver:   await miband.getSwRevision(),
+              //   serial:   await miband.getSerial(),
+              // };
 
-              log(`HW ver: ${info.hw_ver}  SW ver: ${info.sw_ver}`);
-              info.serial && log(`Serial: ${info.serial}`);
-              log(`Battery: ${info.battery.level}%`);
-              log(`Time: ${info.time.toLocaleString()}`);
+              // log(`HW ver: ${info.hw_ver}  SW ver: ${info.sw_ver}`);
+              // info.serial && log(`Serial: ${info.serial}`);
+              // log(`Battery: ${info.battery.level}%`);
+              // log(`Time: ${info.time.toLocaleString()}`);
 
-              let ped = await miband.getPedometerStats();
-              log('Pedometer:', JSON.stringify(ped));
+              // let ped = await miband.getPedometerStats();
+              // log('Pedometer:', JSON.stringify(ped));
 
-              log('Notifications demo...');
-              await miband.showNotification('message');
-              await delay(3000);
-              await miband.showNotification('phone');
-              await delay(5000);
-              await miband.showNotification('off');
+              // log('Notifications demo...');
+              // await miband.showNotification('message');
+              // await delay(3000);
+              // await miband.showNotification('phone');
+              // await delay(5000);
+              // await miband.showNotification('off');
 
-              log('Tap MiBand button, quick!');
-              miband.on('button', () => log('Tap detected'));
-              try {
-                await miband.waitButton(10000);
-              } catch (e) {
-                log('OK, nevermind ;)');
-              }
+              // log('Tap MiBand button, quick!');
+              // miband.on('button', () => log('Tap detected'));
+              // try {
+              //   await miband.waitButton(10000);
+              // } catch (e) {
+              //   log('OK, nevermind ;)');
+              // }
 
-              log('Heart Rate Monitor (single-shot)');
-              log('Result:', await miband.hrmRead());
+              // log('Heart Rate Monitor (single-shot)');
+              // log('Result:', await miband.hrmRead());
 
-              log('Heart Rate Monitor (continuous for 30 sec)...');
+              log('Heart Rate Monitor (continuous for 300 sec)...');
               miband.on('heart_rate', (rate) => {
                 log('Heart Rate:', rate);
               });
-              await miband.hrmStart();
-              await delay(30000);
-              await miband.hrmStop();
 
-              //log('RAW data (no decoding)...')
-              //miband.rawStart();
-              //await delay(30000);
-              //miband.rawStop();
+              // await miband.hrmStart();
+              // await delay(300000);
+              // await miband.hrmStop();
+
+              log('RAW data (no decoding)...')
+              miband.rawStart();
+              await delay(300000);
+              miband.rawStop();
 
               log('Finished.');
             }
