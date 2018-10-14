@@ -7645,6 +7645,10 @@ log$1("test5");
                 }
 
             } else if (event.target.uuid === this.char.hrm_data.uuid) {
+              log$1(toArray(value));
+              log$1("VALUE : "+value);
+              log$1("VALUE : "+value.readUIntBE(0,6).toString(16));
+              log$1("VALUE : "+value.readUInt16BE(0).toString(16));
                 let rate = value.readUInt16BE(0).toString(16);
                 // let rate = value;
                 this.emit('heart_rate', rate);
@@ -7675,7 +7679,7 @@ log$1("test5");
     }
 
     async function test_all(miband, log) {
-        log('commit 17');
+        log('commit 18');
 
         // let info = {
         //   time:     await miband.getTime(),
