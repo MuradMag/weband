@@ -7465,7 +7465,7 @@
         }
 
         async hrmStart() {
-            log("test hrmStart -> Yhy");
+            console.log("test hrmStart -> Yhy");
             await this.char.hrm_ctrl.writeValue(AB([0x15, 0x02, 0x00]));
             await this.char.hrm_ctrl.writeValue(AB([0x15, 0x01, 0x00]));
             await this.char.hrm_ctrl.writeValue(AB([0x15, 0x01, 0x01]));
@@ -7655,7 +7655,7 @@
     }
 
     async function test_all(miband, log) {
-        log('commit 11');
+        log('commit 12');
 
         // let info = {
         //   time:     await miband.getTime(),
@@ -7726,7 +7726,7 @@
 
     async function scan() {
         if (!bluetooth) {
-            log$1('WebBluetooth11 is not supported by your browser!');
+            log$1('WebBluetooth12 is not supported by your browser!');
             return;
         }
 
