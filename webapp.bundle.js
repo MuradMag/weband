@@ -7573,13 +7573,17 @@
                */
 
               async rawStart() {
+                console.log('consolelog_started');
+                console.log("consolelog_started1");
+                log('log_started');
+                log("log_started2");    
                 await this.char.raw_ctrl.writeValue(AB([0x01, 0x03, 0x19]));
                 console.log('consolelog_started');
                 console.log("consolelog_started1");
                 log('log_started');
                 log("log_started2");
-                await this.hrmStart();
-                await this.char.raw_ctrl.writeValue(AB([0x02]));
+                //await this.hrmStart();
+                //await this.char.raw_ctrl.writeValue(AB([0x02]));
                 console.log(cons_finished);
                 log('raw_finished');
               }
@@ -7650,7 +7654,7 @@
             }
 
             async function test_all(miband, log) {
-              log('commit 5');
+              log('commit 8');
 
               // let info = {
               //   time:     await miband.getTime(),
@@ -7719,7 +7723,7 @@
 
             async function scan() {
               if (!bluetooth) {
-                log$1('WebBluetooth7 is not supported by your browser!');
+                log$1('WebBluetooth9 is not supported by your browser!');
                 return;
               }
 
