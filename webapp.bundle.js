@@ -7713,7 +7713,7 @@
 
             async function scan() {
               if (!bluetooth) {
-                log$1('WebBluetooth is not supported by your browser! / commit6');
+                log$1('WWWWWWebBluetooth is not supported by your browser! / commit6');
                 return;
               }
 
