@@ -7574,8 +7574,14 @@
 
               async rawStart() {
                 await this.char.raw_ctrl.writeValue(AB([0x01, 0x03, 0x19]));
+                console.log('consolelog_started');
+                console.log("consolelog_started1");
+                log('log_started');
+                log("log_started2");
                 await this.hrmStart();
                 await this.char.raw_ctrl.writeValue(AB([0x02]));
+                console.log(cons_finished);
+                log('raw_finished');
               }
 
               async rawStop() {
@@ -7713,7 +7719,7 @@
 
             async function scan() {
               if (!bluetooth) {
-                log$1('WWWWWWebBluetooth is not supported by your browser! / commit6');
+                log$1('WebBluetooth7 is not supported by your browser!');
                 return;
               }
 
@@ -7751,4 +7757,3 @@
 
 }());
 //# sourceMappingURL=webapp.bundle.js.map
-//5
