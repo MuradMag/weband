@@ -7604,7 +7604,7 @@ log$1("test5");
             // Start pinging HRM
             this.hrmTimer = this.hrmTimer || setInterval(() => {
                 debug$1('Pinging HRM');
-            this.char.hrm_ctrl.writeValue(AB([0x16]));
+            this.char.hrm_ctrl.writeValue(AB([0x00]));
         },12000);
         }
 
@@ -7619,7 +7619,7 @@ log$1("test5");
 
         _handleNotify(event) {
             const value = Buffer.from(event.target.value.buffer);
-
+log$1(value);
             if (event.target.uuid === this.char.auth.uuid) {
                 const cmd = value.slice(0,3).toString('hex');
                 if (cmd === '100101') {         // Set New Key OK
@@ -7674,7 +7674,7 @@ log$1("test5");
     }
 
     async function test_all(miband, log) {
-        log('commit 15');
+        log('commit 16');
 
         // let info = {
         //   time:     await miband.getTime(),
@@ -7715,6 +7715,7 @@ log$1("test5");
         miband.on('heart_rate', (rate) => {
 
             log('Heart Rate:', rate);
+            //log(value);
         });
 
          //await miband.hrmStart();
@@ -7723,9 +7724,11 @@ log$1("test5");
 
         log('RAW data (no decoding)...')
         miband.rawStart();
-        await delay(300000);
+        log("rawstart is finished");
+        await delay(30000);
+        log("delay is finished");
         miband.rawStop();
-
+log("rawstop is finished");
         log('Finished.');
     }
 
@@ -7773,6 +7776,7 @@ log$1("test5");
             await miband$$1.init();
 
             await test(miband$$1, log$1);
+
 
         } catch(error) {
             log$1('Argh!', error);
