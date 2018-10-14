@@ -7644,6 +7644,7 @@
             }
 
             async function test_all(miband, log) {
+              log('commit 5');
 
               // let info = {
               //   time:     await miband.getTime(),
@@ -7750,3 +7751,4 @@
 
 }());
 //# sourceMappingURL=webapp.bundle.js.map
+//5
