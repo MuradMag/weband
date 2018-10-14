@@ -7620,10 +7620,10 @@ log$1("test5");
         _handleNotify(event) {
             const value = Buffer.from(event.target.value.buffer);
 // log$1(value);
-      log$1(toArray(value));
-              log$1("VALUE : "+value);
-              log$1("VALUE be : "+value.readUIntBE(0,6).toString(16));
-              log$1("VALUE 16be: "+value.readUInt16BE(0).toString(16));
+      // log$1(toArray(value));
+              // log$1("VALUE : "+value);
+              // log$1("VALUE be : "+value.readUIntBE(0,6).toString(16));
+              // log$1("VALUE 16be: "+value.readUInt16BE(0).toString(16));
             if (event.target.uuid === this.char.auth.uuid) {
                 const cmd = value.slice(0,3).toString('hex');
                 if (cmd === '100101') {         // Set New Key OK
@@ -7649,10 +7649,10 @@ log$1("test5");
                 }
 
             } else if (event.target.uuid === this.char.hrm_data.uuid) {
-              log$1(toArray(value));
+              // log$1(toArray(value));
               log$1("VALUE : "+value);
               log$1("VALUE : "+value.readUIntBE(0,6).toString(16));
-              log$1("VALUE : "+value.readUInt16BE(0).toString(16));
+              // log$1("VALUE : "+value.readUInt16BE(0).toString(16));
                 let rate = value.readUInt16BE(0).toString(16);
                 // let rate = value;
                 this.emit('heart_rate', rate);
@@ -7683,7 +7683,7 @@ log$1("test5");
     }
 
     async function test_all(miband, log) {
-        log('commit 19');
+        log('commit 20');
 
         // let info = {
         //   time:     await miband.getTime(),
