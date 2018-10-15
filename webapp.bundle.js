@@ -7680,6 +7680,7 @@ log$1("test5");
             } else if (event.target.uuid === this.char.raw_data.uuid) {
                 // TODO: parse adxl362 data
                 // https://github.com/Freeyourgadget/Gadgetbridge/issues/63#issuecomment-302815121
+	            log$1('Norm data:', value.readUInt16BE(0));
                 log$1('RAW data:', value);
 	            log$1('Maybe RAW data:', value.toString('hex'));
             } else {
@@ -7696,7 +7697,7 @@ log$1("test5");
     }
 
     async function test_all(miband, log) {
-        log('commit 25');
+        log('commit 26');
 
         // let info = {
         //   time:     await miband.getTime(),
