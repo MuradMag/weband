@@ -7681,6 +7681,8 @@ log$1("test5");
                 // TODO: parse adxl362 data
                 // https://github.com/Freeyourgadget/Gadgetbridge/issues/63#issuecomment-302815121
                 log$1('RAW data:', value);
+                 let rate = value.readUInt16BE(0).toString(16);
+                 log$1('RAW data:', rate);
             } else {
                 log$1('chto eto?');
                 log$1(event.target.uuid, '=>', value);
