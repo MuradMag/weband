@@ -7630,9 +7630,9 @@
 			} else if (event.target.uuid === this.char.hrm_data.uuid) {
 				let rate = value.readUInt16BE(0);
 				log$1("Test1 (HEX): ",value.toString('hex'));
-				log$1("TEST2 (readUInt16BE): ",value.readUInt16BE(0));
+				log$1("TEST2 (readUInt16BE): ",value.readUInt16BE(1));
 				// log$1("TEST3 (unsign): ",value.readUInt16BE(0).writeUInt16BE(0));
-				log$1("TEST4 (writeUInt16BE): ",value.writeUInt16BE(0));
+				log$1("TEST4 (writeUInt16BE): ",value.writeUInt16BE(1));
 				// log$1("TEST5 (writeUInt16BE 0 to hex): ",value.writeUInt16BE(0).toString('hex'));
 				// log$1("TEST6 (writeUInt16BE 1 to hex): ",value.writeUInt16BE(1).toString('hex'));
 				// log$1("TEST7 (value): ",value);
