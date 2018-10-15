@@ -13,6 +13,10 @@
         return css;
     }
 
+    var toType = function(obj) {
+    return ({}).toString.call(obj).match(/\s([a-zA-Z]+)/)[1].toLowerCase()
+    }
+
     var global$1 = (typeof global !== "undefined" ? global :
         typeof self !== "undefined" ? self :
             typeof window !== "undefined" ? window : {});
@@ -7656,6 +7660,8 @@ log$1("test5");
                 // let rate = value.readUInt16BE(0).toString(16);
                 // let rate = value;
                 this.emit('heart_rate', value);
+                log$1(toArray(value));
+                log$1(toType(value));
                 //console.log("we are here 7620");
                 //log('Heart Rate:', rate);
 
@@ -7667,6 +7673,7 @@ log$1("test5");
                     debug$1('Unhandled event:', value);
                 }
             } else if (event.target.uuid === this.char.raw_data.uuid) {
+              log$1('we are at 7670');
                 // TODO: parse adxl362 data
                 // https://github.com/Freeyourgadget/Gadgetbridge/issues/63#issuecomment-302815121
                 debug$1('RAW data:', value);
@@ -7683,7 +7690,7 @@ log$1("test5");
     }
 
     async function test_all(miband, log) {
-        log('commit 21');
+        log('commit 22');
 
         // let info = {
         //   time:     await miband.getTime(),
@@ -7757,7 +7764,7 @@ log("rawstop is finished");
 
     async function scan() {
         if (!bluetooth) {
-            log$1('WebBluetooth15 is not supported by your browser!');
+            log$1('WebBluetooth22 is not supported by your browser!');
             return;
         }
 
