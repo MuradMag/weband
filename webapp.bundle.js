@@ -7622,12 +7622,12 @@ log$1("test5");
                */
 
         _handleNotify(event) {
-            log$1(event);
-            log$1('eventtarget ', event.target);
-            log$1(event.target.value);
-            log$1('buffer:= ', event.target.value.buffer);
+            log$1(Buffer.isBuffer(event));
+            log$1(Buffer.isBuffer(event.target));
+            log$1(Buffer.isBuffer(event.target.value));
+            log$1("BUFFER: "+event.target.value.buffer);
             const value = Buffer.from(event.target.value.buffer);
-            log$1('value:= ', value);
+
 // log$1(value);
       // log$1(toArray(value));
               // log$1("VALUE : "+value);
@@ -7681,8 +7681,7 @@ log$1("test5");
                 // TODO: parse adxl362 data
                 // https://github.com/Freeyourgadget/Gadgetbridge/issues/63#issuecomment-302815121
                 log$1('RAW data:', value);
-                 let rate = value.readUInt16BE(0);
-                 log$1('RAW data:', rate);
+	            log$1('Maybe RAW data:', value.toString('hex'));
             } else {
                 log$1('chto eto?');
                 log$1(event.target.uuid, '=>', value);
@@ -7697,7 +7696,7 @@ log$1("test5");
     }
 
     async function test_all(miband, log) {
-        log('commit 26');
+        log('commit 25');
 
         // let info = {
         //   time:     await miband.getTime(),
