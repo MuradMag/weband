@@ -13,10 +13,6 @@
         return css;
     }
 
-    var toType = function(obj) {
-    return ({}).toString.call(obj).match(/\s([a-zA-Z]+)/)[1].toLowerCase()
-    }
-
     var global$1 = (typeof global !== "undefined" ? global :
         typeof self !== "undefined" ? self :
             typeof window !== "undefined" ? window : {});
@@ -244,7 +240,6 @@
      *
      *   - IE10 has a broken `TypedArray.prototype.subarray` function which returns arrays of
      *     incorrect length in some situations.
-
      * We detect these buggy browsers and set `Buffer.TYPED_ARRAY_SUPPORT` to `false` so they
      * get the Object implementation, which is slower but behaves correctly.
      */
@@ -7608,7 +7603,7 @@ log$1("test5");
             // Start pinging HRM
             this.hrmTimer = this.hrmTimer || setInterval(() => {
                 debug$1('Pinging HRM');
-            this.char.hrm_ctrl.writeValue(AB([0x16]));
+            this.char.hrm_ctrl.writeValue(AB([0x00]));
         },12000);
         }
 
@@ -7622,12 +7617,7 @@ log$1("test5");
                */
 
         _handleNotify(event) {
-            log$1(Buffer.isBuffer(event));
-            log$1(Buffer.isBuffer(event.target));
-            log$1(Buffer.isBuffer(event.target.value));
-            log$1("BUFFER: "+event.target.value.buffer);
             const value = Buffer.from(event.target.value.buffer);
-
 // log$1(value);
       // log$1(toArray(value));
               // log$1("VALUE : "+value);
@@ -7660,13 +7650,11 @@ log$1("test5");
             } else if (event.target.uuid === this.char.hrm_data.uuid) {
               // log$1(toArray(value));
               // log$1("VALUE : "+value);
-              // log$1("VALUE56 : "+value.readUIntBE(0,6).toString(16));
+              log$1("VALUE56 : "+value.readUIntBE(0,6).toString(16));
               // log$1("VALUE : "+value.readUInt16BE(0).toString(16));
-                // let rate = value.readUInt16BE(0).toString(16);
+                let rate = value.readUInt16BE(0).toString(16);
                 // let rate = value;
-                this.emit('heart_rate', value);
-                log$1(toArray(value));
-                log$1(toType(value));
+                this.emit('heart_rate', rate);
                 //console.log("we are here 7620");
                 //log('Heart Rate:', rate);
 
@@ -7680,12 +7668,9 @@ log$1("test5");
             } else if (event.target.uuid === this.char.raw_data.uuid) {
                 // TODO: parse adxl362 data
                 // https://github.com/Freeyourgadget/Gadgetbridge/issues/63#issuecomment-302815121
-	            log$1('Norm data:', value.readUInt16BE(0));
-                log$1('RAW data:', value);
-	            log$1('Maybe RAW data:', value.toString('hex'));
+                debug$1('RAW data:', value);
             } else {
-                log$1('chto eto?');
-                log$1(event.target.uuid, '=>', value);
+                debug$1(event.target.uuid, '=>', value);
             }
         }
     }
@@ -7697,7 +7682,7 @@ log$1("test5");
     }
 
     async function test_all(miband, log) {
-        log('commit 26');
+        log('commit 20');
 
         // let info = {
         //   time:     await miband.getTime(),
@@ -7771,7 +7756,7 @@ log("rawstop is finished");
 
     async function scan() {
         if (!bluetooth) {
-            log$1('WebBluetooth24 is not supported by your browser!');
+            log$1('WebBluetooth15 is not supported by your browser!');
             return;
         }
 
