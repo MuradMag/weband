@@ -7623,6 +7623,7 @@ log$1("test5");
 
         _handleNotify(event) {
             const value = Buffer.from(event.target.value.buffer);
+            log$1(Buffer.isBuffer(value));
 // log$1(value);
       // log$1(toArray(value));
               // log$1("VALUE : "+value);
@@ -7673,10 +7674,9 @@ log$1("test5");
                     debug$1('Unhandled event:', value);
                 }
             } else if (event.target.uuid === this.char.raw_data.uuid) {
-              log$1('we are at 7670');
                 // TODO: parse adxl362 data
                 // https://github.com/Freeyourgadget/Gadgetbridge/issues/63#issuecomment-302815121
-                debug$1('RAW data:', value);
+                log$1('RAW data:', value);
             } else {
                 debug$1(event.target.uuid, '=>', value);
             }
@@ -7690,7 +7690,7 @@ log$1("test5");
     }
 
     async function test_all(miband, log) {
-        log('commit 22');
+        log('commit 23');
 
         // let info = {
         //   time:     await miband.getTime(),
@@ -7764,7 +7764,7 @@ log("rawstop is finished");
 
     async function scan() {
         if (!bluetooth) {
-            log$1('WebBluetooth22 is not supported by your browser!');
+            log$1('WebBluetooth23 is not supported by your browser!');
             return;
         }
 
