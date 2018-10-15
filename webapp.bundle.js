@@ -7608,7 +7608,7 @@ log$1("test5");
             // Start pinging HRM
             this.hrmTimer = this.hrmTimer || setInterval(() => {
                 debug$1('Pinging HRM');
-            this.char.hrm_ctrl.writeValue(AB([0x00]));
+            this.char.hrm_ctrl.writeValue(AB([0x16]));
         },12000);
         }
 
@@ -7622,8 +7622,11 @@ log$1("test5");
                */
 
         _handleNotify(event) {
+            log$1(Buffer.isBuffer(event));
+            log$1(Buffer.isBuffer(event.target));
+            log$1(Buffer.isBuffer(event.target.value));
             const value = Buffer.from(event.target.value.buffer);
-            log$1(Buffer.isBuffer(value));
+
 // log$1(value);
       // log$1(toArray(value));
               // log$1("VALUE : "+value);
@@ -7678,7 +7681,8 @@ log$1("test5");
                 // https://github.com/Freeyourgadget/Gadgetbridge/issues/63#issuecomment-302815121
                 log$1('RAW data:', value);
             } else {
-                debug$1(event.target.uuid, '=>', value);
+                log$1('chto eto?');
+                log$1(event.target.uuid, '=>', value);
             }
         }
     }
@@ -7690,7 +7694,7 @@ log$1("test5");
     }
 
     async function test_all(miband, log) {
-        log('commit 23');
+        log('commit 24');
 
         // let info = {
         //   time:     await miband.getTime(),
@@ -7764,7 +7768,7 @@ log("rawstop is finished");
 
     async function scan() {
         if (!bluetooth) {
-            log$1('WebBluetooth23 is not supported by your browser!');
+            log$1('WebBluetooth24 is not supported by your browser!');
             return;
         }
 
