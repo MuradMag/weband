@@ -7617,7 +7617,7 @@
 			} else if (event.target.uuid === this.char.hrm_data.uuid) {
 				let rate = value.readUInt16BE(0);
 				log$1("Raw: ",value.toString('hex'));
-				log$1("Raw lenght: ",length(value.toString('hex')));
+				// log$1("Raw lenght: ",length(value.toString('hex')));
 				this.emit('heart_rate', rate);
 
 			} else if (event.target.uuid === this.char.event.uuid) {
