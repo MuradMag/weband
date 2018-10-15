@@ -7627,7 +7627,7 @@ log$1("test5");
             log$1(event.target.value);
             log$1('buffer:= ', event.target.value.buffer);
             const value = Buffer.from(event.target.value.buffer);
-
+            log$1('value:= ', value);
 // log$1(value);
       // log$1(toArray(value));
               // log$1("VALUE : "+value);
@@ -7695,7 +7695,7 @@ log$1("test5");
     }
 
     async function test_all(miband, log) {
-        log('commit 25');
+        log('commit 26');
 
         // let info = {
         //   time:     await miband.getTime(),
