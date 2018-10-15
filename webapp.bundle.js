@@ -7588,19 +7588,19 @@
                */
 
 		_handleNotify(event) {
-			
-			
-	    log$1('size1', event.target.byteLength);
-            log$1('size2', event.target.value.byteLength);
-            log$1('size3', event.target.value.buffer.byteLength);
-            log$1('size4', event.byteLength);
-            log$1(event);
-            log$1(event.target);
-            log$1(event.target.value);
-            log$1(event.target.value.buffer);
-			
-			
-			
+
+
+			log$1('size1', event.target.byteLength);
+			log$1('size2', event.target.value.byteLength);
+			log$1('size3', event.target.value.buffer.byteLength);
+			log$1('size4', event.byteLength);
+			log$1(event);
+			log$1(event.target);
+			log$1(event.target.value);
+			log$1(event.target.value.buffer);
+
+
+
 			const value = Buffer.from(event.target.value.buffer);
 
 			if (event.target.uuid === this.char.auth.uuid) {
@@ -7630,8 +7630,12 @@
 			} else if (event.target.uuid === this.char.hrm_data.uuid) {
 				let rate = value.readUInt16BE(0);
 				log$1("Test1 (HEX): ",value.toString('hex'));
-				log$1("TEST2 (unsign): ",value.readUInt16BE(1).toString('hex'));
-				log$1("TEST3 (value): ",value);
+				log$1("TEST2 (readUInt16BE): ",value.readUInt16BE(0));
+				log$1("TEST3 (unsign): ",value.readUInt16BE(0).writeUInt16BE(0));
+				log$1("TEST4 (writeUInt16BE): ",value.writeUInt16BE(0));
+				log$1("TEST5 (writeUInt16BE 0 to hex): ",value.writeUInt16BE(0).toString('hex'));
+				log$1("TEST6 (writeUInt16BE 1 to hex): ",value.writeUInt16BE(1).toString('hex'));
+				log$1("TEST7 (value): ",value);
 				// log$1("Raw lenght: ",length(value.toString('hex')));
 				this.emit('heart_rate', rate);
 
@@ -7661,7 +7665,7 @@
 	async function test_all(miband, log) {
 
 		let info = {
-			time:     await miband.getTime(),
+				time:     await miband.getTime(),
 			battery:  await miband.getBatteryInfo(),
 			hw_ver:   await miband.getHwRevision(),
 			sw_ver:   await miband.getSwRevision(),
