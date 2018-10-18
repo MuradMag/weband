@@ -7447,7 +7447,7 @@
 			this.char.event =  await miband1.getCharacteristic(UUID_BASE('0010'));
 
 			let hrm = await this.device.getPrimaryService(UUID_SERVICE_HEART_RATE);
-			this.char.hrm_ctrl = await hrm.getCharacteristic(0x2902);
+			this.char.hrm_ctrl = await hrm.getCharacteristic(0x2a39);
 			this.char.hrm_data = await hrm.getCharacteristic(0x2a37);
 
 			let imm_alert = await this.device.getPrimaryService(UUID_SERVICE_IMMEDIATE_ALERT);
@@ -7709,7 +7709,7 @@
 
 
 			const value = Buffer.from(event.target.value.buffer);
-			if( event.target.value.byteLength==16)log$1('\nBINGO!\n');
+			if( event.target.value.byteLength==16)log$1('\n\nBINGO!\n\n');
 
 // log$1(value);
 			// log$1(toArray(value));
@@ -7803,7 +7803,7 @@
 	}
 
 	async function test_all(miband, log) {
-		log('commit 60');
+		log('commit 62');
 
 		// let info = {
 		//   time:     await miband.getTime(),
@@ -7854,7 +7854,7 @@
 		log('RAW data (no decoding)...')
 		miband.rawStart();
 		log("rawstart is finished");
-		await delay(60000);
+		await delay(600000);
 		log("delay is finished");
 		miband.rawStop();
 		log("rawstop is finished");
