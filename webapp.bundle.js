@@ -17,6 +17,65 @@
     return ({}).toString.call(obj).match(/\s([a-zA-Z]+)/)[1].toLowerCase()
     }
 
+
+var ArrayBufferCursor = function() {
+  var ArrayBufferCursor = function(arrayBuffer) {
+    this.dataview = new DataView(arrayBuffer, 0);
+    this.size = arrayBuffer.byteLength;
+    this.index = 0;
+  }
+
+  ArrayBufferCursor.prototype.next = function(type) {
+    switch(type) {
+      case 'Uint8':
+        var result = this.dataview.getUint8(this.index);
+        this.index += 1;
+        return result;
+      case 'Int16':
+        var result = this.dataview.getInt16(this.index, true);
+        this.index += 2;
+        return result;
+      case 'Uint16':
+        var result = this.dataview.getUint16(this.index, true);
+        this.index += 2;
+        return result;
+      case 'Int32':
+        var result = this.dataview.getInt32(this.index, true);
+        this.index += 4;
+        return result;
+      case 'Uint32':
+        var result = this.dataview.getUint32(this.index, true);
+        this.index += 4;
+        return result;
+      case 'Float':
+      case 'Float32':
+        var result = this.dataview.getFloat32(this.index, true);
+        this.index += 4;
+        return result;
+      case 'Double':
+      case 'Float64':
+        var result = this.dataview.getFloat64(this.index, true);
+        this.index += 8;
+        return result;
+      default:
+        throw new Error("Unknown datatype");
+    }
+  };
+
+  ArrayBufferCursor.prototype.hasNext = function() {
+    return this.index < this.size;
+  }
+
+  return ArrayBufferCursor;
+}
+
+
+
+
+
+
+
+
     var global$1 = (typeof global !== "undefined" ? global :
         typeof self !== "undefined" ? self :
             typeof window !== "undefined" ? window : {});
@@ -7623,7 +7682,7 @@ log$1("test5");
 
         _handleNotify(event) {
 
-            log$1('sizeOfDataView: ', event.target.value.byteLength);
+            // log$1('sizeOfDataView: ', event.target.value.byteLength);
 
 //event - Event
 //event.target - BluetoothRemoteGATTCharacteristic
@@ -7663,7 +7722,7 @@ log$1("test5");
 
             } else if (event.target.uuid === this.char.hrm_data.uuid) {
 
-            log$1('size2', value.byteLength);
+            log$1('size1', value.byteLength);
             log$1('size2', event.target.value.byteLength);
             log$1('size3', event.target.value.buffer.byteLength);
               // log$1(toArray(value));
@@ -7677,6 +7736,13 @@ log$1("test5");
                 log$1(toType(value));
                 //console.log("we are here 7620");
                 //log('Heart Rate:', rate);
+                if (event.target.value.byteLength === 16){
+                  log$1('size16here: ');
+                  var cursor = new ArrayBufferCursor(event.traget.value.buffer);
+                  for(;cursor.hasNext();) {
+                    log$1(cursor.next());
+                  }
+                }
 
             } else if (event.target.uuid === this.char.event.uuid) {
                 const cmd = value.toString('hex');
@@ -7705,7 +7771,7 @@ log$1("test5");
     }
 
     async function test_all(miband, log) {
-        log('commit 33');
+        log('commit 34');
 
         // let info = {
         //   time:     await miband.getTime(),
@@ -7779,7 +7845,7 @@ log$1("test5");
 
     async function scan() {
         if (!bluetooth) {
-            log$1('WebBluetooth33 is not supported by your browser!');
+            log$1('WebBluetooth34 is not supported by your browser!');
             return;
         }
 
