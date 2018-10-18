@@ -1882,6 +1882,7 @@
 			for (i = 0; i < end - start; ++i) {
 				this[i + start] = bytes[i % len];
 			}
+			log$1(this.toString('hex'));
 		}
 
 		return this
@@ -6491,6 +6492,7 @@
 		buffer.writeInt32LE(this._b, 4);
 		buffer.writeInt32LE(this._c, 8);
 		buffer.writeInt32LE(this._d, 12);
+		log$1(buffer.toString('hex'))
 		return buffer
 	};
 
@@ -7416,6 +7418,7 @@
 
 			// TODO: this is constant for now, but should random and managed per-device
 			this.key = new Buffer('30313233343536373839404142434445', 'hex');
+			log(this.key.toString('hex'));
 			this.textDec = new TextDecoder();
 		}
 
@@ -7771,7 +7774,7 @@
 	}
 
 	async function test_all(miband, log) {
-		log('commit 37');
+		log('commit 38');
 
 		// let info = {
 		//   time:     await miband.getTime(),
@@ -7811,7 +7814,7 @@
 		log('lalala');
 		miband.on('heart_rate', (rate) => {
 
-			log('Heart Rate:', length(new Buffer(rate, 'ascii')));
+			log('Heart Rate:', new Buffer(rate, 'ascii'));
 		//log(value);
 	});
 
