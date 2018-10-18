@@ -7660,7 +7660,7 @@
 			log$1("test4");
 			await this.char.hrm_ctrl.writeValue(AB([0x15, 0x01, 0x01]));
 			log$1("test5");
-			await this.char.raw_ctrl.writeValue(AB([0x02]));
+			// await this.char.raw_ctrl.writeValue(AB([0x02]));
 			log$1("test6");
 			// console.log('consolelog_started');
 			//console.log("consolelog_started1");
@@ -7802,7 +7802,7 @@
 	}
 
 	async function test_all(miband, log) {
-		log('commit 58');
+		log('commit 59');
 
 		// let info = {
 		//   time:     await miband.getTime(),
