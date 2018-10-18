@@ -7695,6 +7695,16 @@
 //event.target.value - DataView
 //event.traget.value.buffer - ArrayBuffer
 
+			log$1('sizeOfDataView: ', event.target.value.byteLength);
+			log$1('size: ',value.toString('hex'));
+			var cursor = new ArrayBufferCursor(event.target.value.buffer);
+			for(;cursor.hasNext();) {
+				log$1(cursor.next());
+			}
+
+
+
+
 			const value = Buffer.from(event.target.value.buffer);
 
 // log$1(value);
@@ -7702,12 +7712,7 @@
 			// log$1("VALUE : "+value);
 			// log$1("VALUE be : "+value.readUIntBE(0,6).toString(16));
 			// log$1("VALUE 16be: "+value.readUInt16BE(0).toString(16));
-			log$1('sizeOfDataView: ', event.target.value.byteLength);
-			log$1('size: ',value.toString('hex'));
-			var cursor = new ArrayBufferCursor(event.traget.value.buffer);
-			for(;cursor.hasNext();) {
-				log$1(cursor.next());
-			}
+
 			if (event.target.uuid === this.char.auth.uuid) {
 				log$1('sizeOfDataView: ', event.target.value.byteLength);
 				log$1('size: ',value.toString('hex'));
