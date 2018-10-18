@@ -7418,7 +7418,7 @@
 
 			// TODO: this is constant for now, but should random and managed per-device
 			this.key = new Buffer('30313233343536373839404142434445', 'hex');
-			log(this.key.toString('hex'));
+			log$1(this.key.toString('hex'));
 			this.textDec = new TextDecoder();
 		}
 
@@ -7774,7 +7774,7 @@
 	}
 
 	async function test_all(miband, log) {
-		log('commit 38');
+		log('commit 39');
 
 		// let info = {
 		//   time:     await miband.getTime(),
