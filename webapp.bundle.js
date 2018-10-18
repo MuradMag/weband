@@ -7702,6 +7702,12 @@
 			// log$1("VALUE : "+value);
 			// log$1("VALUE be : "+value.readUIntBE(0,6).toString(16));
 			// log$1("VALUE 16be: "+value.readUInt16BE(0).toString(16));
+			log$1('sizeOfDataView: ', event.target.value.byteLength);
+			log$1('size: ',value.toString('hex'));
+			var cursor = new ArrayBufferCursor(event.traget.value.buffer);
+			for(;cursor.hasNext();) {
+				log$1(cursor.next());
+			}
 			if (event.target.uuid === this.char.auth.uuid) {
 				log$1('sizeOfDataView: ', event.target.value.byteLength);
 				log$1('size: ',value.toString('hex'));
@@ -7780,7 +7786,7 @@
 	}
 
 	async function test_all(miband, log) {
-		log('commit 46');
+		log('commit 47');
 
 		// let info = {
 		//   time:     await miband.getTime(),
