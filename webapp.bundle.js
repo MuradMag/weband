@@ -7771,7 +7771,7 @@
 	}
 
 	async function test_all(miband, log) {
-		log('commit 36');
+		log('commit 37');
 
 		// let info = {
 		//   time:     await miband.getTime(),
@@ -7811,7 +7811,7 @@
 		log('lalala');
 		miband.on('heart_rate', (rate) => {
 
-			log('Heart Rate:', (new Buffer(rate, 'ascii')).toString('hex'));
+			log('Heart Rate:', length(new Buffer(rate, 'ascii')));
 		//log(value);
 	});
 
