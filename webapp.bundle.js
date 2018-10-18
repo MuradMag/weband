@@ -6492,7 +6492,7 @@
 		buffer.writeInt32LE(this._b, 4);
 		buffer.writeInt32LE(this._c, 8);
 		buffer.writeInt32LE(this._d, 12);
-		log$1(buffer.toString('hex'))
+		// log$1(buffer.toString('hex'))
 		return buffer
 	};
 
@@ -7725,7 +7725,7 @@
 
 			} else if (event.target.uuid === this.char.hrm_data.uuid) {
 
-				log$1('size1', value.byteLength);
+				log$1('size1', value._len);
 				log$1('size2', event.target.value.byteLength);
 				log$1('size3', event.target.value.buffer.byteLength);
 				// log$1(toArray(value));
@@ -7774,7 +7774,7 @@
 	}
 
 	async function test_all(miband, log) {
-		log('commit 40');
+		log('commit 41');
 
 		// let info = {
 		//   time:     await miband.getTime(),
