@@ -7433,7 +7433,7 @@
 
 		async init() {
 			let miband2 = await this.device.getPrimaryService(UUID_SERVICE_MIBAND_2);
-			this.char.auth = await miband2.getCharacteristic(UUID_BASE('2902'));
+			this.char.auth = await miband2.getCharacteristic(UUID_BASE('0009'));
 
 			let miband1 = await this.device.getPrimaryService(UUID_SERVICE_MIBAND_1);
 			this.char.time =   await miband1.getCharacteristic(0x2a2b);
@@ -7447,7 +7447,7 @@
 			this.char.event =  await miband1.getCharacteristic(UUID_BASE('0010'));
 
 			let hrm = await this.device.getPrimaryService(UUID_SERVICE_HEART_RATE);
-			this.char.hrm_ctrl = await hrm.getCharacteristic(0x2a39);
+			this.char.hrm_ctrl = await hrm.getCharacteristic(0x2902);
 			this.char.hrm_data = await hrm.getCharacteristic(0x2a37);
 
 			let imm_alert = await this.device.getPrimaryService(UUID_SERVICE_IMMEDIATE_ALERT);
