@@ -19,12 +19,13 @@
 
 
 	var ArrayBufferCursor = function() {
+		log$1("cursor1");
 		var ArrayBufferCursor = function(arrayBuffer) {
 			this.dataview = new DataView(arrayBuffer, 0);
 			this.size = arrayBuffer.byteLength;
 			this.index = 0;
 		}
-
+		log$1("cursor2");
 		ArrayBufferCursor.prototype.next = function(type) {
 			switch(type) {
 				case 'Uint8':
@@ -65,7 +66,7 @@
 		ArrayBufferCursor.prototype.hasNext = function() {
 			return this.index < this.size;
 		}
-
+		log$1("cursor3");
 		return ArrayBufferCursor;
 	}
 
@@ -336,6 +337,7 @@
 				that = new Buffer(length);
 			}
 			that.length = length;
+			log$1("length=",length);
 		}
 
 		return that
@@ -7380,7 +7382,7 @@
 		for (let i = 0; i < buf.length; ++i) {
 			view[i] = buf[i];
 		}
-		log$1(ab.toString('hex'));
+		log$1("AB",ab[0].toString());
 		return ab;
 	};
 
@@ -7686,7 +7688,7 @@
 
 		_handleNotify(event) {
 
-			// log$1('sizeOfDataView: ', event.target.value.byteLength);
+			log$1('sizeOfDataView: ', event.target.value.byteLength);
 
 //event - Event
 //event.target - BluetoothRemoteGATTCharacteristic
@@ -7775,7 +7777,7 @@
 	}
 
 	async function test_all(miband, log) {
-		log('commit 43');
+		log('commit 44');
 
 		// let info = {
 		//   time:     await miband.getTime(),
