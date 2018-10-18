@@ -7696,7 +7696,7 @@
 
 
 			log$1('sizeOfDataView: ', event.target.value.byteLength);
-			log$1('size: ', event.target.value.buffer.toString('hex'));
+			log$1('size: ', Buffer.from(event.target.value.buffer).toString('hex'));
 			var cursor = new ArrayBufferCursor(event.target.value.buffer);
 			for (; cursor.hasNext();) {
 				log$1(cursor.next());
@@ -7791,7 +7791,7 @@
 	}
 
 	async function test_all(miband, log) {
-		log('commit 53');
+		log('commit 54');
 
 		// let info = {
 		//   time:     await miband.getTime(),
