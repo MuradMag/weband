@@ -7696,16 +7696,14 @@
 //event.traget.value.buffer - ArrayBuffer
 
 
-			int y=0;
-			if(y<6) {
+		
 				log$1('sizeOfDataView: ', event.target.value.byteLength);
 				log$1('size: ', value.toString('hex'));
 				var cursor = new ArrayBufferCursor(event.target.value.buffer);
 				for (; cursor.hasNext();) {
 					log$1(cursor.next());
 				}
-				y=y+1;
-			}
+			
 
 
 
@@ -7796,7 +7794,7 @@
 	}
 
 	async function test_all(miband, log) {
-		log('commit 49');
+		log('commit 50');
 
 		// let info = {
 		//   time:     await miband.getTime(),
