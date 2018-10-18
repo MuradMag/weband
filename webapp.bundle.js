@@ -7688,7 +7688,7 @@
 
 		_handleNotify(event) {
 
-			log$1('sizeOfDataView: ', event.target.value.byteLength);
+			// log$1('sizeOfDataView: ', event.target.value.byteLength);
 
 //event - Event
 //event.target - BluetoothRemoteGATTCharacteristic
@@ -7728,8 +7728,9 @@
 
 			} else if (event.target.uuid === this.char.hrm_data.uuid) {
 
-				log$1('size1', length(value));
-				log$1('size2', lenght(value.buffer));
+				// log$1('size1', length(value));
+				// log$1('size2', lenght(value.buffer));
+				log$1('size2: ', event.target.value.byteLength);
 				log$1('size3', event.target.value.buffer.byteLength);
 				// log$1(toArray(value));
 				// log$1("VALUE : "+value);
@@ -7777,7 +7778,7 @@
 	}
 
 	async function test_all(miband, log) {
-		log('commit 44');
+		log('commit 45');
 
 		// let info = {
 		//   time:     await miband.getTime(),
