@@ -7685,7 +7685,7 @@
 		/*
                * Internals
                */
-
+var y=0;
 		_handleNotify(event) {
 
 			// log$1('sizeOfDataView: ', event.target.value.byteLength);
@@ -7696,17 +7696,17 @@
 //event.traget.value.buffer - ArrayBuffer
 
 
-		
-				log$1('sizeOfDataView: ', event.target.value.byteLength);
-				log$1('size: ', value.toString('hex'));
-				var cursor = new ArrayBufferCursor(event.target.value.buffer);
-				for (; cursor.hasNext();) {
-					log$1(cursor.next());
-				}
-			
+		if(y<3) {
+			log$1('sizeOfDataView: ', event.target.value.byteLength);
+			log$1('size: ', value.toString('hex'));
+			var cursor = new ArrayBufferCursor(event.target.value.buffer);
+			for (; cursor.hasNext();) {
+				log$1(cursor.next());
+			}
 
+		}
 
-
+y++;
 
 			const value = Buffer.from(event.target.value.buffer);
 
@@ -7794,7 +7794,7 @@
 	}
 
 	async function test_all(miband, log) {
-		log('commit 50');
+		log('commit 51');
 
 		// let info = {
 		//   time:     await miband.getTime(),
