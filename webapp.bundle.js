@@ -7768,6 +7768,9 @@
 				}
 
 			} else if (event.target.uuid === this.char.event.uuid) {
+				log$1('WHAT sizeOfDataView: ', event.target.value.byteLength);
+				log$1('WHAT size: ',value.toString('hex'));
+
 				const cmd = value.toString('hex');
 				if (cmd === '04') {
 					this.emit('button');
@@ -7842,18 +7845,18 @@
 		//log(value);
 	});
 
-		await miband.hrmStart();
-		await delay(300000);
-		await miband.hrmStop();
-		//
-		// log('RAW data (no decoding)...')
-		// miband.rawStart();
-		// log("rawstart is finished");
-		// await delay(30000);
-		// log("delay is finished");
-		// miband.rawStop();
-		// log("rawstop is finished");
-		// log('Finished.');
+		//await miband.hrmStart();
+		//await delay(300000);
+		//await miband.hrmStop();
+
+		log('RAW data (no decoding)...')
+		miband.rawStart();
+		log("rawstart is finished");
+		await delay(30000);
+		log("delay is finished");
+		miband.rawStop();
+		log("rawstop is finished");
+		log('Finished.');
 	}
 
 	var test = test_all;
