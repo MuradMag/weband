@@ -7791,7 +7791,7 @@
 	}
 
 	async function test_all(miband, log) {
-		log('commit 53');
+		log('commit 54');
 
 		// let info = {
 		//   time:     await miband.getTime(),
