@@ -7695,7 +7695,7 @@
 //event.target.value - DataView
 //event.traget.value.buffer - ArrayBuffer
 
-			
+
 			int y=0;
 			if(y<6) {
 				log$1('sizeOfDataView: ', event.target.value.byteLength);
@@ -7704,7 +7704,7 @@
 				for (; cursor.hasNext();) {
 					log$1(cursor.next());
 				}
-				y++;
+				y=y+1;
 			}
 
 
@@ -7796,7 +7796,7 @@
 	}
 
 	async function test_all(miband, log) {
-		log('commit 48');
+		log('commit 49');
 
 		// let info = {
 		//   time:     await miband.getTime(),
