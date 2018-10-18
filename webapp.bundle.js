@@ -7433,7 +7433,7 @@
 
 		async init() {
 			let miband2 = await this.device.getPrimaryService(UUID_SERVICE_MIBAND_2);
-			this.char.auth = await miband2.getCharacteristic(UUID_BASE('0009'));
+			this.char.auth = await miband2.getCharacteristic(UUID_BASE('2902'));
 
 			let miband1 = await this.device.getPrimaryService(UUID_SERVICE_MIBAND_1);
 			this.char.time =   await miband1.getCharacteristic(0x2a2b);
@@ -7660,7 +7660,8 @@
 			log$1("test4");
 			await this.char.hrm_ctrl.writeValue(AB([0x15, 0x01, 0x01]));
 			log$1("test5");
-			// await this.char.raw_ctrl.writeValue(AB([0x02]));
+			// await this.hrmStart();
+			await this.char.raw_ctrl.writeValue(AB([0x02]));
 			log$1("test6");
 			// console.log('consolelog_started');
 			//console.log("consolelog_started1");
@@ -7802,7 +7803,7 @@
 	}
 
 	async function test_all(miband, log) {
-		log('commit 59');
+		log('commit 60');
 
 		// let info = {
 		//   time:     await miband.getTime(),
