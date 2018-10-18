@@ -7798,7 +7798,7 @@
 	}
 
 	async function test_all(miband, log) {
-		log('commit 56');
+		log('commit 57');
 
 		// let info = {
 		//   time:     await miband.getTime(),
@@ -7842,18 +7842,18 @@
 		//log(value);
 	});
 
-		//await miband.hrmStart();
-		//await delay(300000);
-		//await miband.hrmStop();
-
-		log('RAW data (no decoding)...')
-		miband.rawStart();
-		log("rawstart is finished");
-		await delay(30000);
-		log("delay is finished");
-		miband.rawStop();
-		log("rawstop is finished");
-		log('Finished.');
+		await miband.hrmStart();
+		await delay(300000);
+		await miband.hrmStop();
+		//
+		// log('RAW data (no decoding)...')
+		// miband.rawStart();
+		// log("rawstart is finished");
+		// await delay(30000);
+		// log("delay is finished");
+		// miband.rawStop();
+		// log("rawstop is finished");
+		// log('Finished.');
 	}
 
 	var test = test_all;
