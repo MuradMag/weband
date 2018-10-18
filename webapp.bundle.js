@@ -7380,6 +7380,7 @@
 		for (let i = 0; i < buf.length; ++i) {
 			view[i] = buf[i];
 		}
+		log$1(ab.toString('hex'));
 		return ab;
 	};
 
@@ -7725,7 +7726,7 @@
 
 			} else if (event.target.uuid === this.char.hrm_data.uuid) {
 
-				log$1('size1', value._len);
+				log$1('size1', value._length);
 				log$1('size2', event.target.value.byteLength);
 				log$1('size3', event.target.value.buffer.byteLength);
 				// log$1(toArray(value));
@@ -7774,7 +7775,7 @@
 	}
 
 	async function test_all(miband, log) {
-		log('commit 41');
+		log('commit 42');
 
 		// let info = {
 		//   time:     await miband.getTime(),
