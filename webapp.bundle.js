@@ -7695,8 +7695,10 @@
 //event.traget.value.buffer - ArrayBuffer
 
 
-			log$1('sizeOfDataView: ', event.target.value.byteLength);
-			log$1('size: ', Buffer.from(event.target.value.buffer).toString('hex'));
+			// log$1('sizeOfDataView: ', event.target.value.byteLength);
+			//
+			// log$1('size: ', Buffer.from(event.target.value.buffer).toString('hex'));
+		
 			// var cursor = new ArrayBufferCursor(event.target.value.buffer);
 			// for (; cursor.hasNext();) {
 			// 	log$1(cursor.next());
@@ -7714,8 +7716,8 @@
 			// log$1("VALUE 16be: "+value.readUInt16BE(0).toString(16));
 
 			if (event.target.uuid === this.char.auth.uuid) {
-				log$1('sizeOfDataView: ', event.target.value.byteLength);
-				log$1('size: ',value.toString('hex'));
+				log$1('AUTH sizeOfDataView: ', event.target.value.byteLength);
+				log$1('AUTH size: ',value.toString('hex'));
 				const cmd = value.slice(0,3).toString('hex');
 				if (cmd === '100101') {         // Set New Key OK
 					this.authReqRandomKey();
@@ -7740,7 +7742,8 @@
 				}
 
 			} else if (event.target.uuid === this.char.hrm_data.uuid) {
-
+				log$1('HEART sizeOfDataView: ', event.target.value.byteLength);
+				log$1('HEART size: ',value.toString('hex'));
 				// log$1('size1', length(value));
 				// log$1('size2', lenght(value.buffer));
 				log$1('size2: ', event.target.value.byteLength);
@@ -7772,12 +7775,16 @@
 					debug$1('Unhandled event:', value);
 				}
 			} else if (event.target.uuid === this.char.raw_data.uuid) {
+				log$1('RAW sizeOfDataView: ', event.target.value.byteLength);
+				log$1('RAW size: ',value.toString('hex'));
 				// TODO: parse adxl362 data
 				// https://github.com/Freeyourgadget/Gadgetbridge/issues/63#issuecomment-302815121
 				//log$1('RAW data:', value);
 				// let rate = value.readUInt16BE(0);
 				//log$1('RAW data:', rate);
 			} else {
+				log$1('NiCHO sizeOfDataView: ', event.target.value.byteLength);
+				log$1('NiCHO size: ',value.toString('hex'));
 				log$1('chto eto?');
 				log$1(event.target.uuid, '=>', value);
 			}
@@ -7791,7 +7798,7 @@
 	}
 
 	async function test_all(miband, log) {
-		log('commit 55');
+		log('commit 56');
 
 		// let info = {
 		//   time:     await miband.getTime(),
