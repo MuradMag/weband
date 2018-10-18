@@ -7726,8 +7726,8 @@
 
 			} else if (event.target.uuid === this.char.hrm_data.uuid) {
 
-				log$1('size1', value._length);
-				log$1('size2', event.target.value.byteLength);
+				log$1('size1', length(value));
+				log$1('size2', lenght(value.buffer));
 				log$1('size3', event.target.value.buffer.byteLength);
 				// log$1(toArray(value));
 				// log$1("VALUE : "+value);
@@ -7775,7 +7775,7 @@
 	}
 
 	async function test_all(miband, log) {
-		log('commit 42');
+		log('commit 43');
 
 		// let info = {
 		//   time:     await miband.getTime(),
