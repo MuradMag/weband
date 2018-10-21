@@ -7803,7 +7803,7 @@
 	}
 
 	async function test_all(miband, log) {
-		log('commit 62');
+		log('commit 62.2');
 
 		// let info = {
 		//   time:     await miband.getTime(),
@@ -7854,11 +7854,13 @@
 		log('RAW data (no decoding)...')
 		miband.rawStart();
 		log("rawstart is finished");
-		await delay(600000);
+		await delay(30000);
 		log("delay is finished");
 		miband.rawStop();
 		log("rawstop is finished");
 		log('Finished.');
+		saveAll();
+		
 	}
 
 	var test = test_all;
