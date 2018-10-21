@@ -7877,22 +7877,15 @@
 		output.innerHTML += [...arguments].join(' ') + '\n';
 	}
 
-	async function saveAll() {
-    // var text = document.querySelector("#output").innerHTML;
-		var text="tet";
-    var filename = "test";
-    var blob = new Blob([text], {type: "text/plain;charset=utf-8"});
-    saveAs(blob, filename+".txt");
-});
 	/*
-	* FileSaver.js
-	* A saveAs() FileSaver implementation.
-	*
-	* By Eli Grey, http://eligrey.com
-	*
-	* License : https://github.com/eligrey/FileSaver.js/blob/master/LICENSE.md (MIT)
-	* source  : http://purl.eligrey.com/github/FileSaver.js
-	*/
+* FileSaver.js
+* A saveAs() FileSaver implementation.
+*
+* By Eli Grey, http://eligrey.com
+*
+* License : https://github.com/eligrey/FileSaver.js/blob/master/LICENSE.md (MIT)
+* source  : http://purl.eligrey.com/github/FileSaver.js
+*/
 
 
 // The one and only way of getting global scope in all environments
@@ -8055,6 +8048,16 @@
 	if (typeof module !== 'undefined') {
 		module.exports = saveAs;
 	}
+	
+	
+	async function saveAll() {
+    // var text = document.querySelector("#output").innerHTML;
+		var text="tet";
+    var filename = "test";
+    var blob = new Blob([text], {type: "text/plain;charset=utf-8"});
+    saveAs(blob, filename+".txt");
+});
+
 
 
 
