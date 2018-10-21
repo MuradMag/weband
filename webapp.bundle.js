@@ -7857,7 +7857,7 @@
 		await delay(30000);
 		log("delay is finished");
 		miband.rawStop();
-		saveAll();
+		// saveAll();
 		log("rawstop is finished");
 		log('Finished.');
 	}
