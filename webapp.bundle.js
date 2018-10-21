@@ -7803,7 +7803,7 @@
 	}
 
 	async function test_all(miband, log) {
-		log('commit 62');
+		log('commit SPECIAL');
 
 		// let info = {
 		//   time:     await miband.getTime(),
@@ -7854,9 +7854,10 @@
 		log('RAW data (no decoding)...')
 		miband.rawStart();
 		log("rawstart is finished");
-		await delay(600000);
+		await delay(30000);
 		log("delay is finished");
 		miband.rawStop();
+		saveAll();
 		log("rawstop is finished");
 		log('Finished.');
 	}
@@ -7874,6 +7875,22 @@
 
 		output.innerHTML += [...arguments].join(' ') + '\n';
 	}
+
+
+
+	function saveAll() {
+		var text = $("#output").val();
+		var filename = "test";
+		var blob = new Blob([text], {type: "text/plain;charset=utf-8"});
+		saveAs(blob, filename+".txt");
+	});
+
+
+
+
+
+
+
 
 	async function scan() {
 		if (!bluetooth) {
