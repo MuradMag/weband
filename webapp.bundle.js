@@ -7699,7 +7699,7 @@
 			// log$1('sizeOfDataView: ', event.target.value.byteLength);
 			//
 			// log$1('size: ', Buffer.from(event.target.value.buffer).toString('hex'));
-		
+
 			// var cursor = new ArrayBufferCursor(event.target.value.buffer);
 			// for (; cursor.hasNext();) {
 			// 	log$1(cursor.next());
@@ -7874,6 +7874,17 @@
 
 		output.innerHTML += [...arguments].join(' ') + '\n';
 	}
+
+	async function saveAll() {
+    var text = $("#output").val();
+    var filename = "test";
+    var blob = new Blob([text], {type: "text/plain;charset=utf-8"});
+    saveAs(blob, filename+".txt");
+});
+
+
+
+
 
 	async function scan() {
 		if (!bluetooth) {
