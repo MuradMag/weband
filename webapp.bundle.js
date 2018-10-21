@@ -7877,13 +7877,13 @@
 	}
 
 
-
-	function saveAll() {
-		var text = $("#output").val();
-		var filename = "test";
-		var blob = new Blob([text], {type: "text/plain;charset=utf-8"});
-		saveAs(blob, filename+".txt");
-	});
+	//
+	// function saveAll() {
+	// 	var text = $("#output").val();
+	// 	var filename = "test";
+	// 	var blob = new Blob([text], {type: "text/plain;charset=utf-8"});
+	// 	saveAs(blob, filename+".txt");
+	// });
 
 
 
