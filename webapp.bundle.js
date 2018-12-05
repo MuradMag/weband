@@ -20,13 +20,13 @@
 
 
 	var ArrayBufferCursor = function() {
-		log$1("cursor1");
+		//log$1("cursor1");
 		var ArrayBufferCursor = function(arrayBuffer) {
 			this.dataview = new DataView(arrayBuffer, 0);
 			this.size = arrayBuffer.byteLength;
 			this.index = 0;
 		}
-		log$1("cursor2");
+		//log$1("cursor2");
 		ArrayBufferCursor.prototype.next = function(type) {
 			switch(type) {
 				case 'Uint8':
@@ -67,7 +67,7 @@
 		ArrayBufferCursor.prototype.hasNext = function() {
 			return this.index < this.size;
 		}
-		log$1("cursor3");
+		//log$1("cursor3");
 		return ArrayBufferCursor;
 	}
 
@@ -338,7 +338,7 @@
 				that = new Buffer(length);
 			}
 			that.length = length;
-			log$1("length=",length);
+		//	log$1("length=",length);
 		}
 
 		return that
@@ -7650,20 +7650,20 @@
 			//log("log_started2");
 
 			await this.char.hrm_ctrl.writeValue(AB([0x15, 0x02, 0x00]));
-			log$1("test1");
+			//log$1("test1");
 			await this.char.hrm_ctrl.writeValue(AB([0x15, 0x01, 0x00]));
-			log$1("test2");
+			//log$1("test2");
 			await this.char.raw_ctrl.writeValue(AB([0x01, 0x03, 0x19]));
-			log$1("test3");
+		//	log$1("test3");
 			//???
 			await this.char.auth.writeValue(AB([0x01, 0x00]))
 			// await this.char.hrm_ctrl.writeValue(AB([0x01, 0x00]));
-			log$1("test4");
+			//log$1("test4");
 			await this.char.hrm_ctrl.writeValue(AB([0x15, 0x01, 0x01]));
-			log$1("test5");
+			//log$1("test5");
 			// await this.hrmStart();
 			await this.char.raw_ctrl.writeValue(AB([0x02]));
-			log$1("test6");
+			//log$1("test6");
 			// console.log('consolelog_started');
 			//console.log("consolelog_started1");
 			//log('log_started');
@@ -7688,32 +7688,18 @@
                * Internals
                */
 		_handleNotify(event) {
-
-
-
-
 			// log$1('sizeOfDataView: ', event.target.value.byteLength);
 
 //event - Event
 //event.target - BluetoothRemoteGATTCharacteristic
 //event.target.value - DataView
 //event.traget.value.buffer - ArrayBuffer
-
-
 			// log$1('sizeOfDataView: ', event.target.value.byteLength);
-			//
 			// log$1('size: ', Buffer.from(event.target.value.buffer).toString('hex'));
-
 			// var cursor = new ArrayBufferCursor(event.target.value.buffer);
 			// for (; cursor.hasNext();) {
 			//  log$1(cursor.next());
 			// }
-
-
-
-
-
-
 			const value = Buffer.from(event.target.value.buffer);
 			// if( event.target.value.byteLength==16)log$1('\n\nBINGO!\n\n');
 
@@ -7763,24 +7749,33 @@
 				// let rate = value.readUInt16BE(0).toString(16);
 				let rate = value.readUInt16BE(0);
 				this.emit('heart_rate', rate);
+				// this.emit('heart_rate', value.toString('hex')); example of data: 003c ascii 48 // that shows as 60 in heart rateee
 				// log$1(toArray(value));
+
+				// log$1('starting xhr try');
+				// var xhr = new XMLHttpRequest();
+				// xhr.open('POST', '/', false);
+				// xhr.send('trururu');
+				// if (xhr.status != 200) {
+				//   log$1('starting xhr try1');
+				//   // обработать ошибку
+				//   alert( xhr.status + ' : ' + xhr.statusText ); // пример вывода: 404: Not Found
+				// } else {
+				//   // вывести результат
+				//   log$1('starting xhr try2');
+				//   alert( xhr.responseText ); // responseText -- текст ответа.
+				// }
+
 				// log$1(toType(value));
 				//console.log("we are here 7620");
-				log$1('Heart Rateee: ', rate);
+				// log$1('Heart Rateee: ', rate);
 				if (event.target.value.byteLength === 16){
 					log$1('size16here: ');
-
-
-
-
-
-
 					var cursor = new ArrayBufferCursor(event.traget.value.buffer);
 					for(;cursor.hasNext();) {
 						log$1(cursor.next());
 					}
 				}
-
 			} else if (event.target.uuid === this.char.event.uuid) {
 				// log$1('WHAT sizeOfDataView: ', event.target.value.byteLength);
 				// log$1('WHAT size: ',value.toString('hex'));
@@ -7792,53 +7787,58 @@
 					debug$1('Unhandled event:', value);
 				}
 			} else if (event.target.uuid === this.char.raw_data.uuid) {
-				// log$1('RAW sizeOfDataView: ', event.target.value.byteLength);
+
 
 				if (event.target.value.byteLength === 16){
+					// log$1('RAW data: ',value.toString('hex'));
+					// log$1('RAW sizeOfDataView: ', event.target.value.byteLength); 16
 
 					var nowItIs = new Date().getTime();
 					var rawToDb = value.toString('hex');
+					let rate = value.readUInt16BE(0);
+					// log$1('error here?');
+
+					// log$1('nowIts here: ', nowItIs);
+					// log$1('rawToDb: ', rawToDb);
 					// this.emit('time', nowItIs);
 
-
-					log$1('RAW data: ',value.toString('hex'));
-
-					var values = [nowItIs, rawToDb, rate];
-
-					log$1('nowItIs here: ', nowItIs);
-					log$1('rawToDb here: ', rawToDb);
-					log$1('rate here: ', rate);
+					// log$1('rate here: ', rate);
+					// var values = [nowItIs, rawToDb, rate];
+					var values = [nowItIs, rawToDb];
 					log$1('values here: ', values);
 
 
-					try {
-						log$1('trying');
-						// const client = pool.connect();
-						log$1('hard ', client);
-						client.query(sql, values);
-						log$1('to ', sql);
-						client.release();
-						log$1('achieve', values);
-					} catch (err) {
-						log$1('error is: ', err);
-					}
+					// try {
+					//   log$1('trying');
+					//       // const client = pool.connect();
+					//       log$1('hard ', client);
+					//       client.query(sql, values);
+					//       log$1('to ', sql);
+					//       client.release();
+					//       log$1('achieve', values);
+					//   } catch (err) {
+					//       log$1('error is: ', err);
+					//   }
 
 
-					log$1('starting xhr try');
-					var xhr = new XMLHttpRequest();
-					xhr.open('POST', '/', false);
-					xhr.send('trururu');
-					if (xhr.status != 200) {
-						// обработать ошибку
-						alert( xhr.status + ' : ' + xhr.statusText ); // пример вывода: 404: Not Found
-					} else {
-						// вывести результат
-						alert( xhr.responseText ); // responseText -- текст ответа.
-					}
+					// log$1('starting xhr try');
+					// var xhr = new XMLHttpRequest();
+					// log$1('starting xhr try2');
+					// xhr.open('POST', '/', false);
+					// log$1('starting xhr try3');
+					// xhr.send('trururu');
+					// log$1('starting xhr try4');
+					// if (xhr.status != 200) {  
+					//   // обработать ошибку
+					//   alert( xhr.status + ' : ' + xhr.statusText ); // пример вывода: 404: Not Found
+					// } else {
+					//   // вывести результат
+					//   alert( xhr.responseText ); // responseText -- текст ответа.
+					// }
 
 
 
-					log$1('sizee16here: ');
+					// log$1('sizee16here: ');
 					var cursor = new ArrayBufferCursor(event.traget.value.buffer);
 					log$1('cursor is ', cursor);
 					for(;cursor.hasNext();) {
@@ -7846,12 +7846,15 @@
 						log$1(cursor.next());
 						log$1('end cursor');
 					}
+
+					log$1('RAW datas:', value);
+					log$1('RAW dataes:', rate);
+
 				}
 
 				// TODO: parse adxl362 data
 				// https://github.com/Freeyourgadget/Gadgetbridge/issues/63#issuecomment-302815121
-				//log$1('RAW data:', value);
-				// log$1('RAW data:', rate);
+
 			} else {
 				log$1('chto eto?');
 				log$1(event.target.uuid, '=>', value);
@@ -7868,65 +7871,38 @@
 
 	async function test_all(miband, log) {
 
-		// let info = {
-		//   time:     await miband.getTime(),
-		//   battery:  await miband.getBatteryInfo(),
-		//   hw_ver:   await miband.getHwRevision(),
-		//   sw_ver:   await miband.getSwRevision(),
-		//   serial:   await miband.getSerial(),
-		// };
-
-		// log(`HW ver: ${info.hw_ver}  SW ver: ${info.sw_ver}`);
-		// info.serial && log(`Serial: ${info.serial}`);
-		// log(`Battery: ${info.battery.level}%`);
-		// log(`Time: ${info.time.toLocaleString()}`);
-
-		// let ped = await miband.getPedometerStats();
-		// log('Pedometer:', JSON.stringify(ped));
-
-		// log('Notifications demo...');
-		// await miband.showNotification('message');
-		// await delay(3000);
-		// await miband.showNotification('phone');
-		// await delay(5000);
-		// await miband.showNotification('off');
-
-		// log('Tap MiBand button, quick!');
-		// miband.on('button', () => log('Tap detected'));
-		// try {
-		//   await miband.waitButton(10000);
-		// } catch (e) {
-		//   log('OK, nevermind ;)');
-		// }
-
-		// log('Heart Rate Monitor (single-shot)');
-		// log('Result:', await miband.hrmRead());
-
-		// log('Heart Rate Monitor (continuous for 300 sec)...');
 		miband.on('heart_rate', (rate) => {
 			// let rateRead = value.readUInt16BE(0);
-			log$1('\nHeart Rate on:', rate);
+			log$1('Heart Rate on:', rate);
 			log$1('ascii ', rate.charCodeAt(0));
 
-
-
-
-
-			//log(value);
-		});
-
-		//await miband.hrmStart();
-		//await delay(300000);
-		//await miband.hrmStop();
-
-		log('RAW data (no decoding)...')
-		miband.rawStart();
-		log("rawstart is finished");
-		await delay(20000);
-		log("delay is finished");
-		miband.rawStop();
-		log("rawstop is finished");
-		log('Finished.');
+			// log$1('starting xhr try');
+			// var xhr = new XMLHttpRequest();
+			// xhr.open('POST', '/', false);
+			// xhr.send('trururu');
+			// if (xhr.status != 200) {
+			//   log$1('starting xhr try1');
+			//   // обработать ошибку
+			//   alert( xhr.status + ' : ' + xhr.statusText ); // пример вывода: 404: Not Found
+			// } else {
+			//   // вывести результат
+			//   log$1('starting xhr try2');
+			//   alert( xhr.responseText ); // responseText -- текст ответа.
+			// }
+		}); 
+		var i1=0;
+		
+		while(i1<10){
+			log('RAW data (no decoding)...')
+			miband.rawStart();
+			log("rawstart is finished");
+			await delay(100000);
+			log("delay is finished");
+			miband.rawStop();
+			log("rawstop is finished");
+			log('Finished.');
+			i1=i1+1;
+		}
 	}
 
 	var test = test_all;
@@ -7944,14 +7920,14 @@
 	}
 
 	async function scan() {
-		log$1('scan_pushed');
+		//log$1('scan_pushed');
 		if (!bluetooth) {
 			log$1('WebBluetooth34 is not supported by your browser!');
 			return;
 		}
 
 		try {
-			log$1('Requesting Bluetooth Device.0003..');
+			log$1('Requesting Bluetooth Device.2147..');
 			// log$1(miband);
 
 			const device = await bluetooth.requestDevice({
@@ -7971,19 +7947,21 @@
 			log$1('Connecting to the device...');
 			const server = await device.gatt.connect();
 			log$1('Connected to ', server);
-			log$1(server.toString);
-			log$1(device.toString);
+			log$1(server.toString());
+			log$1(device.toString());
 			log$1(device);
 			log$1('ha');
-			log$1(device.gatt.toString);
-			log$1(server.connected);
+			log$1(device.gatt.toString());
+			// log$1(server.connected); TRUE HERE
 			log$1(server.device);
 			log$1(server.device.id);
 			log$1(server.device.name);
+			log$1('whyspaces?');
+			log$1(server);
 			log$1(server.id);
 			log$1(server.name);
 			log$1('hah');
-			log$1('1 ', Object.getOwnPropertyNames(device));
+			log$1('3 ', Object.getOwnPropertyNames(navigator));
 			log$1('2 ', Object.getOwnPropertyNames(device.gatt));
 
 			let miband$$1 = new miband(server);
@@ -8001,4 +7979,4 @@
 	document.querySelector('#scanBtn').addEventListener('click', scan);
 
 }());
-//# sourceMappingURL=webapp.bundle.js.map
+// INSERT INTO test_table (time, raw, filtered) VALUES (1540121273180, '0258478c458c3c8c4e8c3f8c468c4d8c', 111)
