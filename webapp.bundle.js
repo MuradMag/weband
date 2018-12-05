@@ -18,6 +18,7 @@
 	}
 
 
+
 	var ArrayBufferCursor = function() {
 		log$1("cursor1");
 		var ArrayBufferCursor = function(arrayBuffer) {
@@ -7485,8 +7486,8 @@
 
 			return new Promise((resolve, reject) => {
 				setTimeout(() => reject('Timeout'), 10000);
-			this.once('authenticated', resolve);
-		});
+				this.once('authenticated', resolve);
+			});
 		}
 
 		authSendNewKey(key)       { return this.char.auth.writeValue(AB([0x01, 0x08], key)) }
@@ -7500,8 +7501,8 @@
 		waitButton(timeout = 10000) {
 			return new Promise((resolve, reject) => {
 				setTimeout(() => reject('Timeout'), timeout);
-			this.once('button', resolve);
-		});
+				this.once('button', resolve);
+			});
 		}
 
 		/*
@@ -7529,8 +7530,8 @@
 			await this.char.hrm_ctrl.writeValue(AB([0x15, 0x02, 0x01]));
 			return new Promise((resolve, reject) => {
 				setTimeout(() => reject('Timeout'), 15000);
-			this.once('heart_rate', resolve);
-		});
+				this.once('heart_rate', resolve);
+			});
 		}
 
 		async hrmStart() {
@@ -7542,8 +7543,8 @@
 			// Start pinging HRM
 			this.hrmTimer = this.hrmTimer || setInterval(() => {
 				debug$1('Pinging HRM');
-			this.char.hrm_ctrl.writeValue(AB([0x16]));
-		},12000);
+				this.char.hrm_ctrl.writeValue(AB([0x16]));
+			},12000);
 		}
 
 		async hrmStop() {
@@ -7660,6 +7661,7 @@
 			log$1("test4");
 			await this.char.hrm_ctrl.writeValue(AB([0x15, 0x01, 0x01]));
 			log$1("test5");
+			// await this.hrmStart();
 			await this.char.raw_ctrl.writeValue(AB([0x02]));
 			log$1("test6");
 			// console.log('consolelog_started');
@@ -7673,8 +7675,8 @@
 			// Start pinging HRM
 			this.hrmTimer = this.hrmTimer || setInterval(() => {
 				debug$1('Pinging HRM');
-			this.char.hrm_ctrl.writeValue(AB([0x16]));
-		},12000);
+				this.char.hrm_ctrl.writeValue(AB([0x16]));
+			},12000);
 		}
 
 		async rawStop() {
@@ -7687,6 +7689,9 @@
                */
 		_handleNotify(event) {
 
+
+
+
 			// log$1('sizeOfDataView: ', event.target.value.byteLength);
 
 //event - Event
@@ -7695,17 +7700,22 @@
 //event.traget.value.buffer - ArrayBuffer
 
 
-			log$1('sizeOfDataView: ', event.target.value.byteLength);
-			log$1('size: ', Buffer.from(event.target.value.buffer).toString('hex'));
-			var cursor = new ArrayBufferCursor(event.target.value.buffer);
-			for (; cursor.hasNext();) {
-				log$1(cursor.next());
-			}
+			// log$1('sizeOfDataView: ', event.target.value.byteLength);
+			//
+			// log$1('size: ', Buffer.from(event.target.value.buffer).toString('hex'));
+
+			// var cursor = new ArrayBufferCursor(event.target.value.buffer);
+			// for (; cursor.hasNext();) {
+			//  log$1(cursor.next());
+			// }
+
+
 
 
 
 
 			const value = Buffer.from(event.target.value.buffer);
+			// if( event.target.value.byteLength==16)log$1('\n\nBINGO!\n\n');
 
 // log$1(value);
 			// log$1(toArray(value));
@@ -7714,8 +7724,8 @@
 			// log$1("VALUE 16be: "+value.readUInt16BE(0).toString(16));
 
 			if (event.target.uuid === this.char.auth.uuid) {
-				log$1('sizeOfDataView: ', event.target.value.byteLength);
-				log$1('size: ',value.toString('hex'));
+				// log$1('AUTH sizeOfDataView: ', event.target.value.byteLength);
+				// log$1('AUTH size: ',value.toString('hex'));
 				const cmd = value.slice(0,3).toString('hex');
 				if (cmd === '100101') {         // Set New Key OK
 					this.authReqRandomKey();
@@ -7740,24 +7750,31 @@
 				}
 
 			} else if (event.target.uuid === this.char.hrm_data.uuid) {
-
+				// log$1('HEART sizeOfDataView: ', event.target.value.byteLength);
+				// log$1('HEART size: ',value.toString('hex'));
 				// log$1('size1', length(value));
 				// log$1('size2', lenght(value.buffer));
-				log$1('size2: ', event.target.value.byteLength);
-				log$1('size3: ', event.target.value.buffer.byteLength);
+				// log$1('size2: ', event.target.value.byteLength);
+				// log$1('size3: ', event.target.value.buffer.byteLength);
 				// log$1(toArray(value));
 				// log$1("VALUE : "+value);
 				// log$1("VALUE56 : "+value.readUIntBE(0,6).toString(16));
 				// log$1("VALUE : "+value.readUInt16BE(0).toString(16));
 				// let rate = value.readUInt16BE(0).toString(16);
-				// let rate = value;
-				this.emit('heart_rate', value);
-				log$1(toArray(value));
-				log$1(toType(value));
+				let rate = value.readUInt16BE(0);
+				this.emit('heart_rate', rate);
+				// log$1(toArray(value));
+				// log$1(toType(value));
 				//console.log("we are here 7620");
-				//log('Heart Rate:', rate);
+				log$1('Heart Rateee: ', rate);
 				if (event.target.value.byteLength === 16){
 					log$1('size16here: ');
+
+
+
+
+
+
 					var cursor = new ArrayBufferCursor(event.traget.value.buffer);
 					for(;cursor.hasNext();) {
 						log$1(cursor.next());
@@ -7765,6 +7782,9 @@
 				}
 
 			} else if (event.target.uuid === this.char.event.uuid) {
+				// log$1('WHAT sizeOfDataView: ', event.target.value.byteLength);
+				// log$1('WHAT size: ',value.toString('hex'));
+
 				const cmd = value.toString('hex');
 				if (cmd === '04') {
 					this.emit('button');
@@ -7772,11 +7792,66 @@
 					debug$1('Unhandled event:', value);
 				}
 			} else if (event.target.uuid === this.char.raw_data.uuid) {
+				// log$1('RAW sizeOfDataView: ', event.target.value.byteLength);
+
+				if (event.target.value.byteLength === 16){
+
+					var nowItIs = new Date().getTime();
+					var rawToDb = value.toString('hex');
+					// this.emit('time', nowItIs);
+
+
+					log$1('RAW data: ',value.toString('hex'));
+
+					var values = [nowItIs, rawToDb, rate];
+
+					log$1('nowItIs here: ', nowItIs);
+					log$1('rawToDb here: ', rawToDb);
+					log$1('rate here: ', rate);
+					log$1('values here: ', values);
+
+
+					try {
+						log$1('trying');
+						// const client = pool.connect();
+						log$1('hard ', client);
+						client.query(sql, values);
+						log$1('to ', sql);
+						client.release();
+						log$1('achieve', values);
+					} catch (err) {
+						log$1('error is: ', err);
+					}
+
+
+					log$1('starting xhr try');
+					var xhr = new XMLHttpRequest();
+					xhr.open('POST', '/', false);
+					xhr.send('trururu');
+					if (xhr.status != 200) {
+						// обработать ошибку
+						alert( xhr.status + ' : ' + xhr.statusText ); // пример вывода: 404: Not Found
+					} else {
+						// вывести результат
+						alert( xhr.responseText ); // responseText -- текст ответа.
+					}
+
+
+
+					log$1('sizee16here: ');
+					var cursor = new ArrayBufferCursor(event.traget.value.buffer);
+					log$1('cursor is ', cursor);
+					for(;cursor.hasNext();) {
+						log$1('start cursor');
+						log$1(cursor.next());
+						log$1('end cursor');
+					}
+				}
+
 				// TODO: parse adxl362 data
 				// https://github.com/Freeyourgadget/Gadgetbridge/issues/63#issuecomment-302815121
 				//log$1('RAW data:', value);
-				// let rate = value.readUInt16BE(0);
-				//log$1('RAW data:', rate);
+				// log$1('RAW data:', rate);
 			} else {
 				log$1('chto eto?');
 				log$1(event.target.uuid, '=>', value);
@@ -7786,12 +7861,12 @@
 
 	var miband = MiBand;
 
+
 	function delay(ms) {
 		return new Promise(resolve => setTimeout(resolve, ms))
 	}
 
 	async function test_all(miband, log) {
-		log('commit 54');
 
 		// let info = {
 		//   time:     await miband.getTime(),
@@ -7827,13 +7902,18 @@
 		// log('Heart Rate Monitor (single-shot)');
 		// log('Result:', await miband.hrmRead());
 
-		log('Heart Rate Monitor (continuous for 300 sec)...');
-		log('lalala');
+		// log('Heart Rate Monitor (continuous for 300 sec)...');
 		miband.on('heart_rate', (rate) => {
+			// let rateRead = value.readUInt16BE(0);
+			log$1('\nHeart Rate on:', rate);
+			log$1('ascii ', rate.charCodeAt(0));
 
-			log('Heart Rate:', new Buffer(rate, 'ascii'));
-		//log(value);
-	});
+
+
+
+
+			//log(value);
+		});
 
 		//await miband.hrmStart();
 		//await delay(300000);
@@ -7842,7 +7922,7 @@
 		log('RAW data (no decoding)...')
 		miband.rawStart();
 		log("rawstart is finished");
-		await delay(30000);
+		await delay(20000);
 		log("delay is finished");
 		miband.rawStop();
 		log("rawstop is finished");
@@ -7860,17 +7940,20 @@
 	function log$1() {
 		document.querySelector('main').style.display = 'block';
 
-		output.innerHTML += [...arguments].join(' ') + '\n';
+		output.innerHTML += [...arguments].join(' ') + '<br>';
 	}
 
 	async function scan() {
+		log$1('scan_pushed');
 		if (!bluetooth) {
 			log$1('WebBluetooth34 is not supported by your browser!');
 			return;
 		}
 
 		try {
-			log$1('Requesting Bluetooth Device...');
+			log$1('Requesting Bluetooth Device.0003..');
+			// log$1(miband);
+
 			const device = await bluetooth.requestDevice({
 				filters: [
 					{ services: [ miband.advertisementService ] }
@@ -7878,15 +7961,30 @@
 				optionalServices: miband.optionalServices
 			});
 
+			log$1('requested already');
 			device.addEventListener('gattserverdisconnected', () => {
 				log$1('Device disconnected');
-		});
+			});
 
 			await device.gatt.disconnect();
 
 			log$1('Connecting to the device...');
 			const server = await device.gatt.connect();
-			log$1('Connected');
+			log$1('Connected to ', server);
+			log$1(server.toString);
+			log$1(device.toString);
+			log$1(device);
+			log$1('ha');
+			log$1(device.gatt.toString);
+			log$1(server.connected);
+			log$1(server.device);
+			log$1(server.device.id);
+			log$1(server.device.name);
+			log$1(server.id);
+			log$1(server.name);
+			log$1('hah');
+			log$1('1 ', Object.getOwnPropertyNames(device));
+			log$1('2 ', Object.getOwnPropertyNames(device.gatt));
 
 			let miband$$1 = new miband(server);
 
